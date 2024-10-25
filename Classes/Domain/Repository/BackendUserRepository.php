@@ -4,7 +4,7 @@ namespace KoninklijkeCollective\MyUserManagement\Domain\Repository;
 
 use DateTime;
 use KoninklijkeCollective\MyUserManagement\Domain\DataTransferObject\BackendUserGroupPermission;
-use KoninklijkeCollective\MyUserManagement\Domain\DataTransferObjects\BackendUserVisibilityPermission;
+use KoninklijkeCollective\MyUserManagement\Domain\DataTransferObject\BackendUserVisibilityPermission;
 use KoninklijkeCollective\MyUserManagement\Domain\Model\BackendUser;
 use KoninklijkeCollective\MyUserManagement\Functions\BackendUserAuthenticationTrait;
 use TYPO3\CMS\Beuser\Domain\Model\Demand;
@@ -87,25 +87,24 @@ final class BackendUserRepository extends \TYPO3\CMS\Beuser\Domain\Repository\Ba
     {
         $groupConstraint = array();
         $groups = BackendUserVisibilityPermission::getConfigured();
-        foreach($groups as $element)
-        {
-            $groupConstraint[] = $query->logicalOr([
+        foreach ($groups as $element) {
+            $groupConstraint[] = $query->logicalOr(
                 $query->equals('usergroup', (int)$element),
                 $query->like('usergroup', (int)$element . ',%'),
                 $query->like('usergroup', '%,' . (int)$element),
                 $query->like('usergroup', '%,' . (int)$element . ',%'),
-            ]);
+            );
         }
         $groupConstraint[] =
-            $query->logicalOr([
+            $query->logicalOr(
                 $query->equals('usergroup', ''),
                 $query->equals('usergroup', null),
                 $query->equals('usergroup', 0),
-            ]);
+            );
         $query->matching(
             $query->logicalAnd(
                 $query->equals('deleted', 0),
-                $query->logicalOr($groupConstraint)
+                $query->logicalOr(...$groupConstraint)
             )
         );
     }
