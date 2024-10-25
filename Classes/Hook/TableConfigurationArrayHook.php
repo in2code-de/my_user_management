@@ -65,7 +65,7 @@ final class TableConfigurationArrayHook implements SingletonInterface
         // can unconsciously remove the group.
         // @TODO The user can still delete the group. Hook DataHandler should prevent this.
         if (in_array($id, $selected, true)) {
-            $items[] = ['_hidden_ ' . $label, $id, $icon];
+            $items[] = ['[Externe Berechtigung] -> ' . $label , $id, $icon];
 
             return $items;
         }

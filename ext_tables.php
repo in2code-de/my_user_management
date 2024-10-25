@@ -9,3 +9,5 @@ $GLOBALS['TYPO3_CONF_VARS']['BE']['customPermOptions'][BackendUserActionPermissi
     new BackendUserActionPermission();
 $GLOBALS['TYPO3_CONF_VARS']['BE']['customPermOptions'][BackendUserGroupPermission::KEY] =
     new BackendUserGroupPermission();
+$GLOBALS['TYPO3_CONF_VARS']['BE']['customPermOptions'][BackendUserVisibilityPermission::KEY] =
+    new BackendUserVisibilityPermission();

@@ -40,58 +40,60 @@
     </td>
 
     <td class="col-control">
-        <div class="btn-group" role="group">
-            <be:link.editRecord class="btn btn-default" table="be_users" uid="{backendUser.uid}" title="edit">
-                <core:icon identifier="actions-open"/>
-            </be:link.editRecord>
-            <f:if condition="{backendUser.currentlyLoggedIn} == 1">
-                <f:then>
-                    <span class="btn btn-default disabled"><core:icon identifier="empty-empty"/></span>
-                </f:then>
-                <f:else>
-                    <f:if condition="{backendUser.isDisabled} == 1">
-                        <f:then>
-                            <a class="btn btn-default"
-                               href="{be:moduleLink(route:'tce_db', query:'data[be_users][{backendUser.uid}][disable]=0', currentUrlParameterName:'redirect')}"
-                               title="{f:translate(key:'visibility.unhide', extensionName: 'beuser')}">
-                                <core:icon identifier="actions-edit-unhide"/>
-                            </a>
-                        </f:then>
-                        <f:else>
-                            <a class="btn btn-default"
-                               href="{be:moduleLink(route:'tce_db', query:'data[be_users][{backendUser.uid}][disable]=1', currentUrlParameterName:'redirect')}"
-                               title="{f:translate(key:'visibility.hide', extensionName: 'beuser')}">
-                                <core:icon identifier="actions-edit-hide"/>
-                            </a>
-                        </f:else>
-                    </f:if>
-                </f:else>
-            </f:if>
+        <f:if condition="{backendUser.isAdministrator}">
+            <div class="btn-group" role="group">
+                <be:link.editRecord class="btn btn-default" table="be_users" uid="{backendUser.uid}" title="edit">
+                    <core:icon identifier="actions-open"/>
+                </be:link.editRecord>
+                <f:if condition="{backendUser.currentlyLoggedIn} == 1">
+                    <f:then>
+                        <span class="btn btn-default disabled"><core:icon identifier="empty-empty"/></span>
+                    </f:then>
+                    <f:else>
+                        <f:if condition="{backendUser.isDisabled} == 1">
+                            <f:then>
+                                <a class="btn btn-default"
+                                   href="{be:moduleLink(route:'tce_db', query:'data[be_users][{backendUser.uid}][disable]=0', currentUrlParameterName:'redirect')}"
+                                   title="{f:translate(key:'visibility.unhide', extensionName: 'beuser')}">
+                                    <core:icon identifier="actions-edit-unhide"/>
+                                </a>
+                            </f:then>
+                            <f:else>
+                                <a class="btn btn-default"
+                                   href="{be:moduleLink(route:'tce_db', query:'data[be_users][{backendUser.uid}][disable]=1', currentUrlParameterName:'redirect')}"
+                                   title="{f:translate(key:'visibility.hide', extensionName: 'beuser')}">
+                                    <core:icon identifier="actions-edit-hide"/>
+                                </a>
+                            </f:else>
+                        </f:if>
+                    </f:else>
+                </f:if>
 
-            <f:if condition="{currentUserUid} == {backendUser.uid}">
-                <f:then>
-                    <span class="btn btn-default disabled"><core:icon identifier="empty-empty"/></span>
-                </f:then>
-                <f:else>
-                    <um:security.isActionAllowed action="DELETE_USER">
-                        <a class="btn btn-default t3js-modal-trigger"
-                           href="{be:moduleLink(route:'tce_db', query:'cmd[be_users][{backendUser.uid}][delete]=1', currentUrlParameterName:'redirect')}"
-                           title="{f:translate(key:'delete', extensionName: 'beuser')}"
-                           data-severity="warning"
-                           data-title="{f:translate(key:'LLL:EXT:backend/Resources/Private/Language/locallang_alt_doc.xlf:label.confirm.delete_record.title')}"
-                           data-content="{f:translate(key:'confirm',arguments:'{0:backendUser.userName}', extensionName: 'beuser')}"
-                           data-button-close-text="{f:translate(key:'LLL:EXT:core/Resources/Private/Language/locallang_common.xlf:cancel')}">
-                            <core:icon identifier="actions-edit-delete"/>
-                        </a>
-                    </um:security.isActionAllowed>
-                </f:else>
-            </f:if>
-        </div>
-        <div class="btn-group" role="group">
-            <um:security.isActionAllowed action="SWITCH_USER">
-                <bu:SwitchUser backendUser="{backendUser}"/>
-            </um:security.isActionAllowed>
-        </div>
+                <f:if condition="{currentUserUid} == {backendUser.uid}">
+                    <f:then>
+                        <span class="btn btn-default disabled"><core:icon identifier="empty-empty"/></span>
+                    </f:then>
+                    <f:else>
+                        <um:security.isActionAllowed action="DELETE_USER">
+                            <a class="btn btn-default t3js-modal-trigger"
+                               href="{be:moduleLink(route:'tce_db', query:'cmd[be_users][{backendUser.uid}][delete]=1', currentUrlParameterName:'redirect')}"
+                               title="{f:translate(key:'delete', extensionName: 'beuser')}"
+                               data-severity="warning"
+                               data-title="{f:translate(key:'LLL:EXT:backend/Resources/Private/Language/locallang_alt_doc.xlf:label.confirm.delete_record.title')}"
+                               data-content="{f:translate(key:'confirm',arguments:'{0:backendUser.userName}', extensionName: 'beuser')}"
+                               data-button-close-text="{f:translate(key:'LLL:EXT:core/Resources/Private/Language/locallang_common.xlf:cancel')}">
+                                <core:icon identifier="actions-edit-delete"/>
+                            </a>
+                        </um:security.isActionAllowed>
+                    </f:else>
+                </f:if>
+            </div>
+            <div class="btn-group" role="group">
+                <um:security.isActionAllowed action="SWITCH_USER">
+                    <bu:SwitchUser backendUser="{backendUser}"/>
+                </um:security.isActionAllowed>
+            </div>
+        </f:if>
     </td>
     <td>
         <f:if condition="{backendUser.lastLoginDateAndTime}">

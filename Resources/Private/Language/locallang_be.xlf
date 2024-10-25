@@ -112,6 +112,9 @@
             <trans-unit id="ip_address">
                 <source>IP Address</source>
             </trans-unit>
+            <trans-unit id="backend_access_visibility_permissions">
+                <source>Backend User Management: Allowed visibility of groupmembers</source>
+            </trans-unit>
         </body>
     </file>
 </xliff>

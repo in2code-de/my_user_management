@@ -33,7 +33,7 @@ final class BackendUserRepository extends \TYPO3\CMS\Beuser\Domain\Repository\Ba
         if (!$this->getBackendUserAuthentication()->isAdmin()) {
             $query = $result->getQuery();
             $this->applyUserGroupPermission($query);
-
+            $this->applyGroupConstraint($query);
             return $query->execute();
         }
 
@@ -72,28 +72,41 @@ final class BackendUserRepository extends \TYPO3\CMS\Beuser\Domain\Repository\Ba
             $constraints = [
                 $query->getConstraint(),
                 $query->logicalNot($query->like('username', '_cli_%')),
-            ];
+                $query->logicalNot($query->equals('uid', $this->getBackendUserAuthentication()->user['uid']))
 
-            if (BackendUserGroupPermission::hasConfigured()) {
-                $allowedConstraints = [
-                    // Always allow current user
-                    $query->equals('uid', $this->getBackendUserAuthentication()->user['uid']),
-                ];
-                foreach (BackendUserGroupPermission::getConfigured() as $id) {
-                    // @TODO: Refactor for real n:m relations
-                    $allowedConstraints[] = $query->logicalOr(
-                        $query->equals('usergroup', (int)$id),
-                        $query->like('usergroup', (int)$id . ',%'),
-                        $query->like('usergroup', '%,' . (int)$id),
-                        $query->like('usergroup', '%,' . (int)$id . ',%'),
-                    );
-                }
-                $constraints[] = $query->logicalOr(...$allowedConstraints);
-            }
+            ];
 
             $query->matching($query->logicalAnd(...$constraints));
         }
 
         return $query;
     }
+
+    private function applyGroupConstraint(QueryInterface $query)
+    {
+        $groupConstraint = array();
+        $groups = BackendUserVisibilityPermission::getConfigured();
+        foreach($groups as $element)
+        {
+            $groupConstraint[] = $query->logicalOr([
+                $query->equals('usergroup', (int)$element),
+                $query->like('usergroup', (int)$element . ',%'),
+                $query->like('usergroup', '%,' . (int)$element),
+                $query->like('usergroup', '%,' . (int)$element . ',%'),
+            ]);
+        }
+        $groupConstraint[] =
+            $query->logicalOr([
+                $query->equals('usergroup', ''),
+                $query->equals('usergroup', null),
+                $query->equals('usergroup', 0),
+            ]);
+        $query->matching(
+            $query->logicalAnd(
+                $query->equals('deleted', 0),
+                $query->logicalOr($groupConstraint)
+            )
+        );
+    }
+
 }
