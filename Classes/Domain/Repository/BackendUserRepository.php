@@ -4,6 +4,7 @@ namespace KoninklijkeCollective\MyUserManagement\Domain\Repository;
 
 use DateTime;
 use KoninklijkeCollective\MyUserManagement\Domain\DataTransferObject\BackendUserGroupPermission;
+use KoninklijkeCollective\MyUserManagement\Domain\DataTransferObjects\BackendUserVisibilityPermission;
 use KoninklijkeCollective\MyUserManagement\Domain\Model\BackendUser;
 use KoninklijkeCollective\MyUserManagement\Functions\BackendUserAuthenticationTrait;
 use TYPO3\CMS\Beuser\Domain\Model\Demand;
