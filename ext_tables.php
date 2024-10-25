@@ -2,6 +2,7 @@
 
 use KoninklijkeCollective\MyUserManagement\Domain\DataTransferObject\BackendUserActionPermission;
 use KoninklijkeCollective\MyUserManagement\Domain\DataTransferObject\BackendUserGroupPermission;
+use KoninklijkeCollective\MyUserManagement\Domain\DataTransferObject\BackendUserVisibilityPermission;
 
 defined('TYPO3') or die('Access denied.');
 
