@@ -1,9 +1,7 @@
 <?php
 
-namespace KoninklijkeCollective\MyUserManagement\Domain\DataTransferObjects;
+namespace KoninklijkeCollective\MyUserManagement\Domain\DataTransferObject;
 
-use KoninklijkeCollective\MyUserManagement\Domain\DataTransferObject\AbstractPermission;
-use KoninklijkeCollective\MyUserManagement\Domain\DataTransferObject\PermissionTrait;
 use TYPO3\CMS\Core\Authentication\BackendUserAuthentication;
 use TYPO3\CMS\Core\Database\ConnectionPool;
 use TYPO3\CMS\Core\Database\Query\QueryBuilder;
