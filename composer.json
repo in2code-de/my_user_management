@@ -1,5 +1,5 @@
 {
-    "name": "in2code/my-user-management",
+    "name": "koninklijke-collective/my-user-management",
     "description": "TYPO3 Extension: A module that makes it possible for editors to maintain backend users.",
     "type": "typo3-cms-extension",
     "keywords": [
