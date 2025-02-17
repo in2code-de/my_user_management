@@ -8,7 +8,7 @@ use TYPO3\CMS\Core\Utility\GeneralUtility;
 /**
  * Model for backend user
  */
-final class BackendUser extends \TYPO3\CMS\Beuser\Domain\Model\BackendUser
+final class BackendUser extends \TYPO3\CMS\Extbase\Persistence\ObjectStorage
 {
     public const TABLE = 'be_users';
 
@@ -25,7 +25,7 @@ final class BackendUser extends \TYPO3\CMS\Beuser\Domain\Model\BackendUser
      *
      * @var \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\KoninklijkeCollective\MyUserManagement\Domain\Model\BackendUserGroup>
      */
-    protected $backendUserGroups;
+    protected ObjectStorage $backendUserGroups;
 
     /**
      * @return int[]
