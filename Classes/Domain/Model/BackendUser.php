@@ -2,13 +2,15 @@
 
 namespace KoninklijkeCollective\MyUserManagement\Domain\Model;
 
+use TYPO3\CMS\Extbase\Persistence\ObjectStorage;
 use KoninklijkeCollective\MyUserManagement\Service\OnlineSessionService;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
+use TYPO3\CMS\Extbase\DomainObject\AbstractEntity;
 
 /**
  * Model for backend user
  */
-final class BackendUser extends \TYPO3\CMS\Extbase\Persistence\ObjectStorage
+final class BackendUser extends AbstractEntity
 {
     public const TABLE = 'be_users';
 
@@ -23,7 +25,7 @@ final class BackendUser extends \TYPO3\CMS\Extbase\Persistence\ObjectStorage
     /**
      * Override default backend user groups to map own custom model
      *
-     * @var \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\KoninklijkeCollective\MyUserManagement\Domain\Model\BackendUserGroup>
+     * @var ObjectStorage<\KoninklijkeCollective\MyUserManagement\Domain\Model\BackendUserGroup>
      */
     protected ObjectStorage $backendUserGroups;
 
