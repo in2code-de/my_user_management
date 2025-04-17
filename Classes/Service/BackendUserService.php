@@ -7,12 +7,12 @@ use KoninklijkeCollective\MyUserManagement\Domain\Model\BackendUser;
 use KoninklijkeCollective\MyUserManagement\Domain\Repository\BackendUserRepository;
 use KoninklijkeCollective\MyUserManagement\Functions\BackendUserAuthenticationTrait;
 use TYPO3\CMS\Backend\Utility\BackendUtility;
-use TYPO3\CMS\Extbase\DomainObject\DomainObjectInterface;
+use TYPO3\CMS\Core\SingletonInterface;
 
 /**
  * Service: Backend User - Repository functionality with access check
  */
-final class BackendUserService implements DomainObjectInterface
+final class BackendUserService implements SingletonInterface
 {
     use BackendUserAuthenticationTrait;
 
