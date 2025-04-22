@@ -2,6 +2,7 @@
 
 namespace KoninklijkeCollective\MyUserManagement\Domain\Repository;
 
+use Doctrine\DBAL\Exception;
 use KoninklijkeCollective\MyUserManagement\Domain\Model\BackendUser;
 use KoninklijkeCollective\MyUserManagement\Functions\BackendUserAuthenticationTrait;
 use KoninklijkeCollective\MyUserManagement\Functions\QueryBuilderTrait;
@@ -18,6 +19,9 @@ final class LoginHistoryRepository
     public const TYPE_LOGGED_IN = 255;
     public const ACTION_LOG_IN = 1;
 
+    /**
+     * @throws Exception
+     */
     public function findUserLoginActions(BackendUser $user): array
     {
         $queryBuilder = self::getQueryBuilderForTable('sys_log');
@@ -25,9 +29,12 @@ final class LoginHistoryRepository
         $query = $this->getQueryForUserLoginHistory($queryBuilder);
         $query->andWhere($queryBuilder->expr()->eq('be_users.uid', $user->getUid()));
 
-        return $query->execute()->fetchAllAssociative();
+        return $query->executeQuery()->fetchAllAssociative();
     }
 
+    /**
+     * @throws Exception
+     */
     public function lastLoggedInUsers(int $max = 20): array
     {
         $queryBuilder = self::getQueryBuilderForTable('sys_log');
@@ -35,7 +42,7 @@ final class LoginHistoryRepository
         $query = $this->getQueryForUserLoginHistory($queryBuilder);
         $query->setMaxResults($max);
 
-        return $query->execute()->fetchAllAssociative();
+        return $query->executeQuery()->fetchAllAssociative();
     }
 
     public function getQueryForUserLoginHistory(QueryBuilder $queryBuilder): QueryBuilder

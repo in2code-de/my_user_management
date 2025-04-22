@@ -22,12 +22,46 @@ final class BackendUser extends AbstractEntity
 
     protected ?BackendUser $createdBy = null;
 
+    protected int $disable = 0;
+
+    protected int $admin = 0;
+
+    protected string $username = '';
+
+    protected string $realName = '';
+
+
     /**
      * Override default backend user groups to map own custom model
      *
      * @var ObjectStorage<\KoninklijkeCollective\MyUserManagement\Domain\Model\BackendUserGroup>
      */
+
     protected ObjectStorage $backendUserGroups;
+
+    public function getBackendUserGroups(): ObjectStorage
+    {
+        return $this->backendUserGroups;
+    }
+
+    public function getUserName(): string
+    {
+        return $this->username;
+    }
+
+    public function getRealName(): string
+    {
+        return $this->realName;
+    }
+
+    public function getIsAdmin() {
+        return $this->admin;
+    }
+
+    public function getIsDisabled()
+    {
+        return $this->disable;
+    }
 
     /**
      * @return int[]
@@ -120,4 +154,6 @@ final class BackendUser extends AbstractEntity
         return GeneralUtility::makeInstance(OnlineSessionService::class)
             ->userIsCurrentlyLoggedIn($this);
     }
+
+
 }

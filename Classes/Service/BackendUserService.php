@@ -20,11 +20,16 @@ final class BackendUserService implements SingletonInterface
     {
     }
 
+    public function setBackendUserRepository(BackendUserRepository $backendUserRepository): void
+    {
+        $this->backendUserRepository = $backendUserRepository;
+    }
+
     /**
      * Find users which has access to given page id
      * Checks db mounts
      *
-     * @return \KoninklijkeCollective\MyUserManagement\Domain\Model\BackendUser[]
+     * @return BackendUser[]
      */
     public function findUsersWithPageAccess(int $pageId): array
     {
@@ -40,7 +45,7 @@ final class BackendUserService implements SingletonInterface
     /**
      * Find all known backend users
      *
-     * @return \KoninklijkeCollective\MyUserManagement\Domain\Model\BackendUser[]
+     * @return BackendUser[]
      */
     public function findAllBackendUsers(): array
     {
@@ -104,7 +109,7 @@ final class BackendUserService implements SingletonInterface
      */
     public function isAllowedUser(BackendUser $user): bool
     {
-        if ($user->getIsAdministrator() && !self::getBackendUserAuthentication()->isAdmin()) {
+        if ($user->getIsAdmin() && !self::getBackendUserAuthentication()->isAdmin()) {
             // Ignore admins if a non admin is retrieving the information!
             return false;
         }
@@ -121,7 +126,7 @@ final class BackendUserService implements SingletonInterface
         $users = [];
         foreach ($this->findAllBackendUsers() as $user) {
             if ($user instanceof BackendUser) {
-                if ($user->getIsAdministrator()) {
+                if ($user->getIsAdmin()) {
                     $users[] = $user;
                 } elseif (count($match = array_intersect($rootLine, $user->getInheritedMountPoints())) > 0) {
                     $user->setActiveMountPoints($match);

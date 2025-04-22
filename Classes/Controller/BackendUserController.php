@@ -159,7 +159,7 @@ final class BackendUserController extends ActionController
         if ($this->getBackendUserControllerService()->canCreate('index')) {
             $addUserButton = $buttonBar->makeLinkButton()
                 ->setIcon($this->iconFactory->getIcon('actions-plus', Icon::SIZE_SMALL))
-                ->setTitle(LocalizationUtility::translate('LLL:EXT:beuser/Resources/Private/Language/locallang.xlf:backendUser.create', 'beuser'))
+                ->setTitle(LocalizationUtility::translate('LLL:EXT:cms-beuser/Resources/Private/Language/locallang.xlf:btn.backendUser.create'))
                 ->setShowLabelText(true)
                 ->setHref((string)$this->backendUriBuilder->buildUriFromRoute('record_edit', [
                     'edit' => ['be_users' => [0 => 'new']],
