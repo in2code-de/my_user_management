@@ -5,12 +5,11 @@ namespace KoninklijkeCollective\MyUserManagement\Domain\Model;
 use TYPO3\CMS\Extbase\Persistence\ObjectStorage;
 use KoninklijkeCollective\MyUserManagement\Service\OnlineSessionService;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
-use TYPO3\CMS\Extbase\DomainObject\AbstractEntity;
 
 /**
  * Model for backend user
  */
-final class BackendUser extends AbstractEntity
+final class BackendUser extends \TYPO3\CMS\Beuser\Domain\Model\BackendUser
 {
     public const TABLE = 'be_users';
 
@@ -26,7 +25,7 @@ final class BackendUser extends AbstractEntity
 
     protected int $admin = 0;
 
-    protected string $username = '';
+    protected string $userName = '';
 
     protected string $realName = '';
 
@@ -46,7 +45,7 @@ final class BackendUser extends AbstractEntity
 
     public function getUserName(): string
     {
-        return $this->username;
+        return $this->userName;
     }
 
     public function getRealName(): string
@@ -58,7 +57,7 @@ final class BackendUser extends AbstractEntity
         return $this->admin;
     }
 
-    public function getIsDisabled()
+    public function getIsDisabled(): bool
     {
         return $this->disable;
     }
