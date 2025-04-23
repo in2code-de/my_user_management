@@ -17,13 +17,17 @@
         <um:security.isAdmin>
             <f:then>
                 <div class="form-group">
-                    <label for="tx_Beuser_usertype" class="form-label"><f:translate key="admin" extensionName="beuser">Admin</f:translate></label>
-                    <f:form.select
-                            id="tx_Beuser_usertype"
-                            class="form-select"
-                            property="userType"
-                            options="{0: '{f:translate(key:\"both\", extensionName: \"beuser\")}', 1: '{f:translate(key:\"adminOnly\", extensionName: \"beuser\")}', 2: '{f:translate(key:\"normalUserOnly\", extensionName: \"beuser\")}'}"
-                    />
+                    <label for="tx_Beuser_usertype" class="form-label"><f:translate key="backendUser.list.filter.userType.admin" extensionName="beuser">Admin</f:translate></label>
+					<f:form.select
+						id="tx_Beuser_usertype"
+						class="form-select"
+						property="userType"
+						options="{
+							0: '{f:translate(key:\"backendUser.list.filter.userType.all\", extensionName: \"beuser\")}',
+							1: '{f:translate(key:\"backendUser.list.filter.userType.admin\", extensionName: \"beuser\")}',
+							2: '{f:translate(key:\"backendUser.list.filter.userType.normalUser\", extensionName: \"beuser\")}'
+						}"
+					/>
                 </div>
             </f:then>
             <f:else>
@@ -51,14 +55,14 @@
         </div>
         <div class="form-group">
             <label for="tx_beuser_backendUserGroup" class="form-label"><f:translate key="backendUserGroup">User Group</f:translate></label>
-            <f:form.select
-                id="tx_beuser_backendUserGroup"
-                class="form-select"
-                property="backendUserGroup"
-                options="{backendUserGroups}"
-                optionLabelField="title"
-                optionValueField="uid"
-            />
+			<f:form.select
+				id="tx_beuser_backendUserGroup"
+				class="form-select"
+				property="backendUserGroup"
+				options="{backendUserGroups}"
+				optionLabelField="title"
+				optionValueField="uid"
+			/>
         </div>
         <div class="form-group align-self-end">
             <f:form.button type="submit" name="operation" value="filter" class="btn btn-default">{f:translate(key: 'filter')}</f:form.button>
