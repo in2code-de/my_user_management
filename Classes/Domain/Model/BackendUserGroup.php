@@ -3,11 +3,12 @@
 namespace KoninklijkeCollective\MyUserManagement\Domain\Model;
 
 use TYPO3\CMS\Core\Utility\GeneralUtility;
+use TYPO3\CMS\Extbase\Persistence\ObjectStorage;
 
 /**
  * Custom model for backend user group readability
  */
-final class BackendUserGroup extends \TYPO3\CMS\Extbase\Persistence\ObjectStorage
+final class BackendUserGroup extends \TYPO3\CMS\Beuser\Domain\Model\BackendUserGroup
 {
     public const TABLE = 'be_groups';
 
