@@ -113,7 +113,7 @@ final class BackendUserController extends ActionController
      *
      * @param  Demand|null  $demand
      */
-    public function indexAction(Demand $demand = null, int $currentPage = 1, string $operation = ''): ResponseInterface
+    public function indexAction(?Demand $demand = null, int $currentPage = 1, string $operation = ''): ResponseInterface
     {
         $this->getBackendUserControllerService()->validateAccessToAction('index');
 
