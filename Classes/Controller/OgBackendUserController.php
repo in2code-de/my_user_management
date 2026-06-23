@@ -17,6 +17,7 @@ use TYPO3\CMS\Beuser\Domain\Repository\BackendUserSessionRepository;
 use TYPO3\CMS\Beuser\Service\UserInformationService;
 use TYPO3\CMS\Core\Imaging\Icon;
 use TYPO3\CMS\Core\Imaging\IconFactory;
+use TYPO3\CMS\Core\Imaging\IconSize;
 use TYPO3\CMS\Core\Messaging\AbstractMessage;
 use TYPO3\CMS\Core\Page\PageRenderer;
 use TYPO3\CMS\Core\Pagination\SimplePagination;
@@ -109,7 +110,7 @@ final class OgBackendUserController extends \TYPO3\CMS\Beuser\Controller\Backend
         $this->addMainMenu('index');
         $buttonBar = $this->moduleTemplate->getDocHeaderComponent()->getButtonBar();
         $addUserButton = $buttonBar->makeLinkButton()
-            ->setIcon($this->iconFactory->getIcon('actions-add', Icon::SIZE_SMALL))
+            ->setIcon($this->iconFactory->getIcon('actions-add', IconSize::SMALL))
             ->setTitle(LocalizationUtility::translate('LLL:EXT:backend/Resources/Private/Language/locallang_layout.xlf:newRecordGeneral'))
             ->setHref(
                 $this->backendUriBuilder->buildUriFromRoute('record_edit', [
@@ -181,7 +182,7 @@ final class OgBackendUserController extends \TYPO3\CMS\Beuser\Controller\Backend
         $this->addMainMenu('groups');
         $buttonBar = $this->moduleTemplate->getDocHeaderComponent()->getButtonBar();
         $addGroupButton = $buttonBar->makeLinkButton()
-            ->setIcon($this->iconFactory->getIcon('actions-plus', Icon::SIZE_SMALL))
+            ->setIcon($this->iconFactory->getIcon('actions-plus', IconSize::SMALL))
             ->setTitle(LocalizationUtility::translate('LLL:EXT:beuser/Resources/Private/Language/locallang.xlf:backendUserGroup.create', 'beuser'))
             ->setShowLabelText(true)
             ->setHref((string)$this->backendUriBuilder->buildUriFromRoute('record_edit', [

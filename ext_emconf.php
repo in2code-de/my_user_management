@@ -13,8 +13,8 @@ $EM_CONF['my_user_management'] = [
     'author_company' => 'Rotterdam School of Management, Erasmus University',
     'constraints' => [
         'depends' => [
-            'typo3' => '^13.0.0',
-            'beuser' => '^13.0.0',
+            'typo3' => '^14.0.0',
+            'beuser' => '^14.0.0',
         ],
         'conflicts' => [],
         'suggests' => [],
