@@ -113,7 +113,7 @@ final class BackendUserController extends ActionController
      *
      * @param  Demand|null  $demand
      */
-    public function indexAction(Demand $demand = null, int $currentPage = 1, string $operation = ''): ResponseInterface
+    public function indexAction(?Demand $demand = null, int $currentPage = 1, string $operation = ''): ResponseInterface
     {
         $this->getBackendUserControllerService()->validateAccessToAction('index');
 
@@ -159,7 +159,7 @@ final class BackendUserController extends ActionController
         if ($this->getBackendUserControllerService()->canCreate('index')) {
             $addUserButton = $buttonBar->makeLinkButton()
                 ->setIcon($this->iconFactory->getIcon('actions-plus', Icon::SIZE_SMALL))
-                ->setTitle(LocalizationUtility::translate('LLL:EXT:beuser/Resources/Private/Language/locallang.xlf:backendUser.create', 'beuser'))
+                ->setTitle(LocalizationUtility::translate('LLL:EXT:beuser/Resources/Private/Language/locallang.xlf:btn.backendUser.create', 'beuser'))
                 ->setShowLabelText(true)
                 ->setHref((string)$this->backendUriBuilder->buildUriFromRoute('record_edit', [
                     'edit' => ['be_users' => [0 => 'new']],
@@ -419,7 +419,7 @@ final class BackendUserController extends ActionController
         if ($this->getBackendUserControllerService()->canCreate('groups')) {
             $addGroupButton = $buttonBar->makeLinkButton()
                 ->setIcon($this->iconFactory->getIcon('actions-plus', Icon::SIZE_SMALL))
-                ->setTitle(LocalizationUtility::translate('LLL:EXT:beuser/Resources/Private/Language/locallang.xlf:backendUserGroup.create', 'beuser'))
+                ->setTitle(LocalizationUtility::translate('LLL:EXT:beuser/Resources/Private/Language/locallang.xlf:btn.backendUserGroup.create', 'beuser'))
                 ->setShowLabelText(true)
                 ->setHref((string)$this->backendUriBuilder->buildUriFromRoute('record_edit', [
                     'edit' => ['be_groups' => [0 => 'new']],

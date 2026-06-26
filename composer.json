@@ -15,17 +15,17 @@
     "homepage": "https://github.com/koninklijke-collective/my_user_management",
     "license": "LGPL-3.0+",
     "require": {
-        "typo3/cms-core": "12.*@dev",
-        "typo3/cms-beuser": "12.*@dev"
+        "typo3/cms-core": "13.*@dev",
+        "typo3/cms-beuser": "13.*@dev"
     },
     "require-dev": {
-        "typo3/testing-framework": "^6.3.3",
-        "codeception/codeception": "^4.1",
-        "codeception/module-webdriver": "^1.1",
-        "codeception/module-asserts": "^1.2",
-        "typo3/coding-standards": "^0.2.0",
-        "phpstan/phpstan": "^0.12.37",
-        "typo3/tailor": "^1.2"
+        "typo3/testing-framework": "^9.1.2",
+        "codeception/codeception": "^5.1.2",
+        "codeception/module-webdriver": "^4.0.3",
+        "codeception/module-asserts": "^3.0.0",
+        "typo3/coding-standards": "^0.8.0",
+        "phpstan/phpstan": "^2.1.5",
+        "typo3/tailor": "^1.6.0"
     },
     "config": {
         "vendor-dir": ".Build/vendor",

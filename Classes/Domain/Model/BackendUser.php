@@ -2,6 +2,7 @@
 
 namespace KoninklijkeCollective\MyUserManagement\Domain\Model;
 
+use TYPO3\CMS\Extbase\Persistence\ObjectStorage;
 use KoninklijkeCollective\MyUserManagement\Service\OnlineSessionService;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 
@@ -20,12 +21,46 @@ final class BackendUser extends \TYPO3\CMS\Beuser\Domain\Model\BackendUser
 
     protected ?BackendUser $createdBy = null;
 
+    protected int $disable = 0;
+
+    protected int $admin = 0;
+
+    protected string $userName = '';
+
+    protected string $realName = '';
+
+
     /**
      * Override default backend user groups to map own custom model
      *
-     * @var \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\KoninklijkeCollective\MyUserManagement\Domain\Model\BackendUserGroup>
+     * @var ObjectStorage<\KoninklijkeCollective\MyUserManagement\Domain\Model\BackendUserGroup>
      */
-    protected $backendUserGroups;
+
+    protected ObjectStorage $backendUserGroups;
+
+    public function getBackendUserGroups(): ObjectStorage
+    {
+        return $this->backendUserGroups;
+    }
+
+    public function getUserName(): string
+    {
+        return $this->userName;
+    }
+
+    public function getRealName(): string
+    {
+        return $this->realName;
+    }
+
+    public function getIsAdmin() {
+        return $this->admin;
+    }
+
+    public function getIsDisabled(): bool
+    {
+        return $this->disable;
+    }
 
     /**
      * @return int[]
@@ -118,4 +153,6 @@ final class BackendUser extends \TYPO3\CMS\Beuser\Domain\Model\BackendUser
         return GeneralUtility::makeInstance(OnlineSessionService::class)
             ->userIsCurrentlyLoggedIn($this);
     }
+
+
 }

@@ -35,7 +35,7 @@ abstract class AbstractPermission implements ArrayAccess, Countable
      * Offset to retrieve
      */
     #[ReturnTypeWillChange]
-    public function offsetGet($offset)
+    public function offsetGet($offset): mixed
     {
         return $this->data[$offset] ?? null;
     }

@@ -41,7 +41,7 @@
                         <b>{backendUser.userName}</b>
                     </backend:link.editRecord>
                     <f:if condition="{onlineBackendUsers.{backendUser.uid}}">
-                        <span class="badge badge-success"><f:translate key="online" extensionName="beuser"/></span>
+                        <span class="badge badge-success"><f:translate key="backendUser.list.label.online" extensionName="beuser"/></span>
                     </f:if>
                     <beuser:mfaStatus userUid="{backendUser.uid}"/>
                     <br>
@@ -156,7 +156,7 @@
                         </f:if>
 
                         <um:security.isAdmin>
-                            <beuser:SwitchUser class="btn btn-default" backendUser="{backendUser}"/>
+                            <um:SwitchUser class="btn btn-default" backendUser="{backendUser}"/>
                         </um:security.isAdmin>
                     </div>
                 </td>

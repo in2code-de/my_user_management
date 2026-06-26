@@ -67,8 +67,7 @@ final class AccessUtility
         return match ($table) {
             BackendUser::TABLE => BackendUserActionPermission::isConfigured(BackendUserActionPermission::ACTION_ADD_USER),
             BackendUserGroup::TABLE => BackendUserActionPermission::isConfigured(BackendUserActionPermission::ACTION_ADD_GROUP),
-            // Bugged so cant adjust or edit
-            // FileMount::TABLE => BackendUserActionPermission::isConfigured(BackendUserActionPermission::ACTION_ADD_FILEMOUNT),
+            FileMount::TABLE => BackendUserActionPermission::isConfigured(BackendUserActionPermission::ACTION_ADD_FILEMOUNT),
             default => false,
         };
     }
@@ -82,9 +81,7 @@ final class AccessUtility
         return match ($table) {
             BackendUser::TABLE => BackendUserActionPermission::isConfigured(BackendUserActionPermission::ACTION_DELETE_USER),
             BackendUserGroup::TABLE => BackendUserActionPermission::isConfigured(BackendUserActionPermission::ACTION_DELETE_GROUP),
-
-            // Bugged so cant adjust or edit
-            // FileMount::TABLE => BackendUserActionPermission::isConfigured(BackendUserActionPermission::ACTION_DELETE_FILEMOUNT),
+            FileMount::TABLE => BackendUserActionPermission::isConfigured(BackendUserActionPermission::ACTION_DELETE_FILEMOUNT),
             default => false,
         };
     }

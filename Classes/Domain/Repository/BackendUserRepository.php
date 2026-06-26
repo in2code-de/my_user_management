@@ -8,6 +8,7 @@ use KoninklijkeCollective\MyUserManagement\Domain\Model\BackendUser;
 use KoninklijkeCollective\MyUserManagement\Functions\BackendUserAuthenticationTrait;
 use TYPO3\CMS\Beuser\Domain\Model\Demand;
 use TYPO3\CMS\Extbase\Persistence\QueryInterface;
+use TYPO3\CMS\Extbase\Persistence\Generic\QueryResult;
 
 final class BackendUserRepository extends \TYPO3\CMS\Beuser\Domain\Repository\BackendUserRepository
 {
@@ -25,7 +26,7 @@ final class BackendUserRepository extends \TYPO3\CMS\Beuser\Domain\Repository\Ba
     /**
      * Override demanded query for filtering by group access
      */
-    public function findDemanded(Demand $demand)
+    public function findDemanded(Demand $demand): QueryResult
     {
         $result = parent::findDemanded($demand);
 

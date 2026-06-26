@@ -243,52 +243,57 @@
     </f:if>
 </f:section>
 
+
 <f:section name="tables">
-    <f:if condition="{tables.all}">
-        <div class="table-fit">
-            <table class="table table-bordered table-hover">
-                <thead>
-                <tr>
-                    <th>
-                        <f:if condition="{showHeadline}">
-                            <f:translate key="tableModes" extensionName="beuser"/>
-                        </f:if>
-                    </th>
-                    <th class="text-center">
-                        <f:translate key="tableModes.select"/>
-                    </th>
-                    <th class="text-center">
-                        <f:translate key="tableModes.modify"/>
-                    </th>
-                </tr>
-                </thead>
-                <tbody>
-                <f:for each="{tables.all}" key="table" as="label">
-                    <tr>
-                        <td class="col-title col-responsive nowrap">
-                            <f:if condition="{label}">{f:translate(key: label, default: label, extensionName: 'beuser')}</f:if>
-                            <code>[{table}]</code>
-                        </td>
-                        <td class="text-center">
-                            <beuser:display.tableAccess table="{table}" select="{tables.tables_select}" modify="{tables.tables_modify}">
-                                <f:then><span class="text-success"><core:icon identifier="actions-check" size="small"/></span>
-                                </f:then>
-                                <f:else><span class="text-danger"><core:icon identifier="actions-close" size="small"/></span></f:else>
-                            </beuser:display.tableAccess>
-                        </td>
-                        <td class="text-center">
-                            <beuser:display.tableAccess table="{table}" modify="{tables.tables_modify}">
-                                <f:then><span class="text-success"><core:icon identifier="actions-check" size="small"/></span>
-                                </f:then>
-                                <f:else><span class="text-danger"><core:icon identifier="actions-close" size="small"/></span></f:else>
-                            </beuser:display.tableAccess>
-                        </td>
-                    </tr>
-                </f:for>
-                </tbody>
-            </table>
-        </div>
-    </f:if>
+	<f:if condition="{tables.all}">
+		<f:for each="{tables.all}" key="table" as="label">
+			<f:if condition="{tables.tables_select.{table}} && !{tables.tables_modify.{table}}">
+				<f:variable name="tableReadConfigured" value="1" />
+			</f:if>
+			<f:if condition="{tables.tables_modify.{table}}">
+				<f:variable name="tableReadWriteConfigured" value="1" />
+			</f:if>
+		</f:for>
+		<f:if condition="{tableReadConfigured}">
+			<div class="panel panel-default">
+				<div class="panel-heading" role="tab">
+					<div class="panel-heading-row">
+						<button
+							class="panel-button collapsed"
+							type="button"
+							data-bs-toggle="collapse"
+							data-bs-target="#permission-group-read-table-{id}-collapse"
+							aria-controls="permission-group-read-table-{id}-collapse"
+							aria-expanded="false"
+						>
+							<div class="panel-title">
+								<f:translate key="LLL:EXT:beuser/Resources/Private/Language/locallang.xlf:tableModes.read" />
+							</div>
+							<span class="caret"></span>
+						</button>
+					</div>
+				</div>
+				<div id="permission-group-read-table-{id}-collapse" class="panel-collapse collapse" data-persist-collapse-state="true" role="tabpanel">
+					<div class="table-fit">
+						<table class="table">
+							<f:for each="{tables.all}" key="table" as="label">
+								<f:if condition="{tables.tables_select.{table}} && !{tables.tables_modify.{table}}">
+									<tr>
+										<td class="col-icon">
+											<core:iconForRecord table="{table}" row="{id: '0'}" />
+										</td>
+										<td class="col-title">
+											<f:if condition="{label}">{f:translate(key:label, default:label)}</f:if><f:if condition="{showUid}"> <code>[{table}]</code></f:if>
+										</td>
+									</tr>
+								</f:if>
+							</f:for>
+						</table>
+					</div>
+				</div>
+			</div>
+		</f:if>
+	</f:if>
 </f:section>
 
 <f:section name="nonExcludeFields">

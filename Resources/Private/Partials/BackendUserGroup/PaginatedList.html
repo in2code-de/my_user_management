@@ -31,7 +31,7 @@
                             data-contextmenu-trigger="click"
                             data-contextmenu-table="be_groups"
                             data-contextmenu-uid="{backendUserGroup.uid}"
-                            title="{f:if(condition: '{backendUserGroup.description}', then: '{backendUserGroup.description} ')}(id={backendUserGroup.uid})"
+                            title="{f:translate(key:'backendUserGroup.list.title', extensionName: 'beuser')}"
                     >
                         <beuser:spriteIconForRecord table="be_groups" object="{backendUserGroup}"/>
                     </a>

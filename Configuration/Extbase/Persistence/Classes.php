@@ -6,6 +6,9 @@ return [
     \KoninklijkeCollective\MyUserManagement\Domain\Model\BackendUser::class => [
         'tableName' => 'be_users',
         'properties' => [
+            'userName' => [
+                'fieldName' => 'username',
+            ],
             'allowedLanguages' => [
                 'fieldName' => 'allowed_languages',
             ],
