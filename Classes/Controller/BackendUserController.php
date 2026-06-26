@@ -20,7 +20,7 @@ use TYPO3\CMS\Beuser\Domain\Repository\BackendUserSessionRepository;
 use TYPO3\CMS\Beuser\Service\UserInformationService;
 use TYPO3\CMS\Core\Authentication\BackendUserAuthentication;
 use TYPO3\CMS\Core\Context\Context;
-use TYPO3\CMS\Core\Imaging\Icon;
+use TYPO3\CMS\Core\Imaging\IconSize;
 use TYPO3\CMS\Core\Imaging\IconFactory;
 use TYPO3\CMS\Core\Page\PageRenderer;
 use TYPO3\CMS\Core\Pagination\SimplePagination;
@@ -158,7 +158,7 @@ final class BackendUserController extends ActionController
         $buttonBar = $this->moduleTemplate->getDocHeaderComponent()->getButtonBar();
         if ($this->getBackendUserControllerService()->canCreate('index')) {
             $addUserButton = $buttonBar->makeLinkButton()
-                ->setIcon($this->iconFactory->getIcon('actions-plus', Icon::SIZE_SMALL))
+                ->setIcon($this->iconFactory->getIcon('actions-plus', IconSize::SMALL))
                 ->setTitle(LocalizationUtility::translate('LLL:EXT:beuser/Resources/Private/Language/locallang.xlf:btn.backendUser.create', 'beuser'))
                 ->setShowLabelText(true)
                 ->setHref((string)$this->backendUriBuilder->buildUriFromRoute('record_edit', [
@@ -220,13 +220,13 @@ final class BackendUserController extends ActionController
         $this->addMainMenu('show');
         $buttonBar = $this->moduleTemplate->getDocHeaderComponent()->getButtonBar();
         $backButton = $buttonBar->makeLinkButton()
-            ->setIcon($this->iconFactory->getIcon('actions-view-go-back', Icon::SIZE_SMALL))
+            ->setIcon($this->iconFactory->getIcon('actions-view-go-back', IconSize::SMALL))
             ->setTitle(LocalizationUtility::translate('LLL:EXT:core/Resources/Private/Language/locallang_core.xlf:labels.goBack'))
             ->setShowLabelText(true)
             ->setHref((string)$this->backendUriBuilder->buildUriFromRoute('myusermanagement_user_admin'));
         $buttonBar->addButton($backButton, ButtonBar::BUTTON_POSITION_LEFT, 1);
         $editButton = $buttonBar->makeLinkButton()
-            ->setIcon($this->iconFactory->getIcon('actions-open', Icon::SIZE_SMALL))
+            ->setIcon($this->iconFactory->getIcon('actions-open', IconSize::SMALL))
             ->setTitle(LocalizationUtility::translate('LLL:EXT:core/Resources/Private/Language/locallang_core.xlf:labels.edit'))
             ->setShowLabelText(true)
             ->setHref((string)$this->backendUriBuilder->buildUriFromRoute('record_edit', [
@@ -235,7 +235,7 @@ final class BackendUserController extends ActionController
             ]));
         $buttonBar->addButton($editButton, ButtonBar::BUTTON_POSITION_LEFT, 2);
         $addUserButton = $buttonBar->makeLinkButton()
-            ->setIcon($this->iconFactory->getIcon('actions-plus', Icon::SIZE_SMALL))
+            ->setIcon($this->iconFactory->getIcon('actions-plus', IconSize::SMALL))
             ->setTitle(LocalizationUtility::translate('LLL:EXT:beuser/Resources/Private/Language/locallang.xlf:backendUser.create', 'beuser'))
             ->setShowLabelText(true)
             ->setHref((string)$this->backendUriBuilder->buildUriFromRoute('record_edit', [
@@ -278,7 +278,7 @@ final class BackendUserController extends ActionController
         $this->addMainMenu('compare');
         $buttonBar = $this->moduleTemplate->getDocHeaderComponent()->getButtonBar();
         $backButton = $buttonBar->makeLinkButton()
-            ->setIcon($this->iconFactory->getIcon('actions-view-go-back', Icon::SIZE_SMALL))
+            ->setIcon($this->iconFactory->getIcon('actions-view-go-back', IconSize::SMALL))
             ->setTitle(LocalizationUtility::translate('LLL:EXT:core/Resources/Private/Language/locallang_core.xlf:labels.goBack'))
             ->setShowLabelText(true)
             ->setHref((string)$this->backendUriBuilder->buildUriFromRoute('myusermanagement_user_admin'));
@@ -418,7 +418,7 @@ final class BackendUserController extends ActionController
         $buttonBar = $this->moduleTemplate->getDocHeaderComponent()->getButtonBar();
         if ($this->getBackendUserControllerService()->canCreate('groups')) {
             $addGroupButton = $buttonBar->makeLinkButton()
-                ->setIcon($this->iconFactory->getIcon('actions-plus', Icon::SIZE_SMALL))
+                ->setIcon($this->iconFactory->getIcon('actions-plus', IconSize::SMALL))
                 ->setTitle(LocalizationUtility::translate('LLL:EXT:beuser/Resources/Private/Language/locallang.xlf:btn.backendUserGroup.create', 'beuser'))
                 ->setShowLabelText(true)
                 ->setHref((string)$this->backendUriBuilder->buildUriFromRoute('record_edit', [
@@ -455,7 +455,7 @@ final class BackendUserController extends ActionController
         $this->addMainMenu('compareGroups');
         $buttonBar = $this->moduleTemplate->getDocHeaderComponent()->getButtonBar();
         $backButton = $buttonBar->makeLinkButton()
-            ->setIcon($this->iconFactory->getIcon('actions-view-go-back', Icon::SIZE_SMALL))
+            ->setIcon($this->iconFactory->getIcon('actions-view-go-back', IconSize::SMALL))
             ->setTitle(LocalizationUtility::translate('LLL:EXT:core/Resources/Private/Language/locallang_core.xlf:labels.goBack'))
             ->setShowLabelText(true)
             ->setHref($this->uriBuilder->uriFor('groups'));
@@ -525,7 +525,7 @@ final class BackendUserController extends ActionController
 
         if ($this->getBackendUserControllerService()->canCreate('filemounts')) {
             $addFilemountButton = $buttonBar->makeLinkButton()
-                ->setIcon($this->iconFactory->getIcon('actions-plus', Icon::SIZE_SMALL))
+                ->setIcon($this->iconFactory->getIcon('actions-plus', IconSize::SMALL))
                 ->setTitle(LocalizationUtility::translate('LLL:EXT:beuser/Resources/Private/Language/locallang.xlf:filemount.create', 'beuser'))
                 ->setShowLabelText(true)
                 ->setHref((string)$this->backendUriBuilder->buildUriFromRoute('record_edit', [

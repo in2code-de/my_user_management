@@ -14,7 +14,7 @@ use TYPO3\CMS\Backend\Routing\UriBuilder;
 use TYPO3\CMS\Backend\Template\Components\ButtonBar;
 use TYPO3\CMS\Backend\Template\ModuleTemplate;
 use TYPO3\CMS\Backend\Template\ModuleTemplateFactory;
-use TYPO3\CMS\Core\Imaging\Icon;
+use TYPO3\CMS\Core\Imaging\IconSize;
 use TYPO3\CMS\Core\Imaging\IconFactory;
 use TYPO3\CMS\Core\Type\ContextualFeedbackSeverity;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
@@ -117,7 +117,7 @@ final class LoginHistoryController extends ActionController
         $uriBuilder = GeneralUtility::makeInstance(UriBuilder::class);
 
         $editUserButton = $buttonBar->makeLinkButton()
-            ->setIcon($iconFactory->getIcon('actions-open', Icon::SIZE_SMALL))
+            ->setIcon($iconFactory->getIcon('actions-open', IconSize::SMALL))
             ->setTitle(LocalizationUtility::translate('LLL:EXT:backend/Resources/Private/Language/locallang_layout.xlf:edit'))
             ->setHref($uriBuilder->buildUriFromRoute('record_edit', [
                 'edit' => ['be_users' => [$backendUser->getUid() => 'edit']],
@@ -128,7 +128,7 @@ final class LoginHistoryController extends ActionController
         if (!$backendUser->isCurrentlyLoggedIn()) {
             if ($backendUser->getIsDisabled()) {
                 $enableUserButton = $buttonBar->makeLinkButton()
-                    ->setIcon($iconFactory->getIcon('actions-edit-hide', Icon::SIZE_SMALL))
+                    ->setIcon($iconFactory->getIcon('actions-edit-hide', IconSize::SMALL))
                     ->setTitle(LocalizationUtility::translate('LLL:EXT:backend/Resources/Private/Language/locallang_layout.xlf:hide'))
                     ->setHref($uriBuilder->buildUriFromRoute('tce_db', [
                         'data' => ['be_users' => [$backendUser->getUid() => ['disable' => 0]]],
@@ -137,7 +137,7 @@ final class LoginHistoryController extends ActionController
                 $buttonBar->addButton($enableUserButton);
             } else {
                 $enableUserButton = $buttonBar->makeLinkButton()
-                    ->setIcon($iconFactory->getIcon('actions-edit-unhide', Icon::SIZE_SMALL))
+                    ->setIcon($iconFactory->getIcon('actions-edit-unhide', IconSize::SMALL))
                     ->setTitle(LocalizationUtility::translate('LLL:EXT:backend/Resources/Private/Language/locallang_layout.xlf:unHide'))->setHref(
                         $uriBuilder->buildUriFromRoute('tce_db', [
                             'data' => ['be_users' => [$backendUser->getUid() => ['disable' => 1]]],

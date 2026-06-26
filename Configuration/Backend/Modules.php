@@ -48,7 +48,7 @@ return [
         'labels' => 'LLL:EXT:my_user_management/Resources/Private/Language/Backend/UserAccess.xlf',
         'extensionName' => 'MyUserManagement',
         'iconIdentifier' => 'module-my_user_management-user-access',
-        'navigationComponent' => '@typo3/backend/page-tree/page-tree-element',
+        'navigationComponent' => '@typo3/backend/tree/page-tree-element',
         'controllerActions' => [
             UserAccessController::class => ['index'],
         ],

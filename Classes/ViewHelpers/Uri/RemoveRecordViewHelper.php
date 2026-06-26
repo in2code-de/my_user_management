@@ -2,13 +2,10 @@
 
 namespace KoninklijkeCollective\MyUserManagement\ViewHelpers\Uri;
 
-use Closure;
 use InvalidArgumentException;
 use TYPO3\CMS\Backend\Routing\UriBuilder;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
-use TYPO3Fluid\Fluid\Core\Rendering\RenderingContextInterface;
 use TYPO3Fluid\Fluid\Core\ViewHelper\AbstractViewHelper;
-use TYPO3Fluid\Fluid\Core\ViewHelper\Traits\CompileWithRenderStatic;
 
 /**
  * Remove Record ViewHelper, see FormEngine logic
@@ -17,8 +14,6 @@ use TYPO3Fluid\Fluid\Core\ViewHelper\Traits\CompileWithRenderStatic;
  */
 final class RemoveRecordViewHelper extends AbstractViewHelper
 {
-    use CompileWithRenderStatic;
-
     public function initializeArguments(): void
     {
         $this->registerArgument('uid', 'int', 'uid of record to be deleted', true);
@@ -26,28 +21,22 @@ final class RemoveRecordViewHelper extends AbstractViewHelper
         $this->registerArgument('returnUrl', 'string', '', false, '');
     }
 
-    public static function renderStatic(
-        array $arguments,
-        Closure $renderChildrenClosure,
-        RenderingContextInterface $renderingContext
-    ): string {
-        if ($arguments['uid'] < 1) {
+    public function render(): string
+    {
+        if ($this->arguments['uid'] < 1) {
             throw new InvalidArgumentException(
-                'Uid must be a positive integer, ' . $arguments['uid'] . ' given.',
+                'Uid must be a positive integer, ' . $this->arguments['uid'] . ' given.',
                 1574000004
             );
         }
 
-        if (empty($arguments['returnUrl'])) {
-            $arguments['returnUrl'] = GeneralUtility::getIndpEnv('REQUEST_URI');
-        }
+        $returnUrl = $this->arguments['returnUrl'] ?: GeneralUtility::getIndpEnv('REQUEST_URI');
 
         $parameters = [
-            'cmd' => [$arguments['table'] => [$arguments['uid'] => ['delete' => 1]]],
-            'redirect' => $arguments['returnUrl'],
+            'cmd' => [$this->arguments['table'] => [$this->arguments['uid'] => ['delete' => 1]]],
+            'redirect' => $returnUrl,
         ];
-        $uriBuilder = GeneralUtility::makeInstance(UriBuilder::class);
 
-        return (string)$uriBuilder->buildUriFromRoute('tce_db', $parameters);
+        return (string)GeneralUtility::makeInstance(UriBuilder::class)->buildUriFromRoute('tce_db', $parameters);
     }
 }
