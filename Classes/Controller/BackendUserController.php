@@ -378,7 +378,7 @@ final class BackendUserController extends ActionController
      *
      * @param  BackendUserGroup|null  $userGroupDto
      */
-    public function groupsAction(BackendUserGroup $userGroupDto = null, int $currentPage = 1, string $operation = ''): ResponseInterface
+    public function groupsAction(?BackendUserGroup $userGroupDto = null, int $currentPage = 1, string $operation = ''): ResponseInterface
     {
         $this->getBackendUserControllerService()->validateAccessToAction('groups');
 
