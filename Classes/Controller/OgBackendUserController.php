@@ -12,6 +12,7 @@ use Psr\Http\Message\ResponseInterface;
 use TYPO3\CMS\Backend\Routing\UriBuilder as BackendUriBuilder;
 use TYPO3\CMS\Backend\Template\Components\ButtonBar;
 use TYPO3\CMS\Backend\Template\ModuleTemplateFactory;
+use TYPO3\CMS\Beuser\Domain\Dto\BackendUserGroup as BackendUserGroupDto;
 use TYPO3\CMS\Beuser\Domain\Model\Demand;
 use TYPO3\CMS\Beuser\Domain\Repository\BackendUserSessionRepository;
 use TYPO3\CMS\Beuser\Service\UserInformationService;
@@ -55,7 +56,7 @@ final class OgBackendUserController extends \TYPO3\CMS\Beuser\Controller\Backend
         );
     }
 
-    public function indexAction(Demand $demand = null, int $currentPage = 1, string $operation = ''): ResponseInterface
+    public function indexAction(?Demand $demand = null, int $currentPage = 1, string $operation = ''): ResponseInterface
     {
         if (!AccessUtility::beUserHasRightToEditTable(BackendUser::TABLE)) {
             $this->addFlashMessage(
@@ -137,7 +138,7 @@ final class OgBackendUserController extends \TYPO3\CMS\Beuser\Controller\Backend
      * @param  int  $currentPage
      * @return ResponseInterface
      */
-    public function groupsAction(\TYPO3\CMS\Beuser\Domain\Dto\BackendUserGroup $userGroupDto = null, int $currentPage = 1, string $operation = ''): ResponseInterface
+    public function groupsAction(?BackendUserGroupDto $userGroupDto = null, int $currentPage = 1, string $operation = ''): ResponseInterface
     {
         if (!AccessUtility::beUserHasRightToEditTable(BackendUserGroup::TABLE)) {
             $this->addFlashMessage(
@@ -155,7 +156,7 @@ final class OgBackendUserController extends \TYPO3\CMS\Beuser\Controller\Backend
         }
 
         if ($userGroupDto === null) {
-            $userGroupDto = \TYPO3\CMS\Beuser\Domain\Dto\BackendUserGroup::fromUc((array)$this->moduleData->get('userGroupDto', []));
+            $userGroupDto = BackendUserGroupDto::fromUc((array)$this->moduleData->get('userGroupDto', []));
         } else {
             $this->moduleData->set('userGroupDto', $userGroupDto->forUc());
         }
