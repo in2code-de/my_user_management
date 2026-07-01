@@ -12,6 +12,8 @@ use TYPO3\CMS\Backend\Template\Components\ButtonBar;
 use TYPO3\CMS\Backend\Template\ModuleTemplate;
 use TYPO3\CMS\Backend\Template\ModuleTemplateFactory;
 use TYPO3\CMS\Backend\Utility\BackendUtility;
+use TYPO3\CMS\Core\Authentication\BackendUserAuthentication;
+use TYPO3\CMS\Core\Page\PageRenderer;
 use TYPO3\CMS\Core\Type\Bitmask\Permission;
 use TYPO3\CMS\Extbase\Mvc\Controller\ActionController;
 use TYPO3\CMS\Extbase\Utility\LocalizationUtility;
@@ -27,6 +29,7 @@ final class UserAccessController extends ActionController
     public function __construct(
         private readonly BackendUserService $backendUserService,
         private readonly ModuleTemplateFactory $moduleTemplateFactory,
+        protected readonly PageRenderer $pageRenderer,
     ) {
     }
 
@@ -62,6 +65,10 @@ final class UserAccessController extends ActionController
             ->setDisplayName(LocalizationUtility::translate('myusermanagement_user_access', 'myUserManagement') . ' - ' . $page['uid']);
         $buttonBar->addButton($shortcutButton, ButtonBar::BUTTON_POSITION_RIGHT);
 
+        if ($this->getBackendUser()->isAdmin()) {
+            $this->pageRenderer->loadJavaScriptModule('@typo3/backend/switch-user.js');
+        }
+
         $this->moduleTemplate->assignMultiple([
             'page' => $page,
             'backendUsers' => $this->backendUserService->findUsersWithPageAccess($page['uid']),
@@ -83,5 +90,10 @@ final class UserAccessController extends ActionController
         );
 
         return is_array($page) ? $page : null;
+    }
+
+    protected function getBackendUser(): BackendUserAuthentication
+    {
+        return $GLOBALS['BE_USER'];
     }
 }
